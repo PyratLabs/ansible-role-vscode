@@ -1,0 +1,19 @@
+---
+
+- name: Ensure RPM GPG key is present
+  rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Ensure Zypper repository file exists
+  zypper_repository:
+    name: vscode
+    description: VS Code Repository
+    repo: https://packages.microsoft.com/yumrepos/vscode
+    state: present
+
+- name: Ensure VS Code is installed
+  zypper:
+    name: code
+    state: present
+    update_cache: true

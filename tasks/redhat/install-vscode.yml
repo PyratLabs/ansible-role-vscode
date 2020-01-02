@@ -1,0 +1,31 @@
+---
+
+- name: Ensure RPM GPG key is present
+  rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Ensure YUM repository file exists
+  yum_repository:
+    name: vscode
+    description: VS Code Text Editor Repository
+    file: vscode
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    state: present
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Ensure VS Code is installed (YUM)
+  yum:
+    name: code
+    state: present
+    update_cache: true
+  when: ansible_pkg_mgr == "yum"
+
+- name: Ensure VS Code is installed (DNF)
+  yum:
+    name: code
+    state: present
+    update_cache: true
+  when: ansible_pkg_mgr == "dnf"
