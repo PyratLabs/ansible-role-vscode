@@ -37,7 +37,7 @@ Example playbook for installing the latest vscode version globally:
 
 ## License
 
-BSD
+[BSD 3-clause](LICENSE.txt)
 
 ## Author Information
 
